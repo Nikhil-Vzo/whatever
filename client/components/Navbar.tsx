@@ -1,23 +1,14 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Building2, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { Building2, Users } from "lucide-react";
 
 type UserRole = "customer" | "builder";
 
 interface NavbarProps {
-  onRoleChange?: (role: UserRole) => void;
+  selectedRole: UserRole;
+  onRoleChange: (role: UserRole) => void;
 }
 
-export default function Navbar({ onRoleChange }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<UserRole>("customer");
-
-  const handleRoleChange = (role: UserRole) => {
-    setSelectedRole(role);
-    setIsOpen(false);
-    onRoleChange?.(role);
-  };
-
+export default function Navbar({ selectedRole, onRoleChange }: NavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -34,68 +25,35 @@ export default function Navbar({ onRoleChange }: NavbarProps) {
           </span>
         </motion.div>
 
-        {/* Right side - Role selector */}
-        <div className="relative">
+        {/* Right side - Direct role selection */}
+        <div className="flex gap-3">
           <motion.button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors"
+            onClick={() => onRoleChange("customer")}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+              selectedRole === "customer"
+                ? "bg-slate-900 text-white shadow-lg"
+                : "border-2 border-slate-300 text-slate-900 hover:border-slate-900"
+            }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-sm font-medium text-slate-900">
-              {selectedRole === "customer" ? "👤 Customer" : "🏢 Builder"}
-            </span>
-            <motion.div
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ChevronDown className="w-4 h-4 text-slate-600" />
-            </motion.div>
+            <Users className="w-5 h-5" />
+            Customer
           </motion.button>
 
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
-              >
-                <motion.button
-                  onClick={() => handleRoleChange("customer")}
-                  className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors ${
-                    selectedRole === "customer"
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-900 hover:bg-slate-50"
-                  }`}
-                  whileHover={{ x: 4 }}
-                >
-                  <Users className="w-5 h-5" />
-                  <div>
-                    <p className="font-semibold">Customer</p>
-                    <p className="text-xs opacity-75">Post projects</p>
-                  </div>
-                </motion.button>
-
-                <motion.button
-                  onClick={() => handleRoleChange("builder")}
-                  className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors border-t border-slate-200 ${
-                    selectedRole === "builder"
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-900 hover:bg-slate-50"
-                  }`}
-                  whileHover={{ x: 4 }}
-                >
-                  <Building2 className="w-5 h-5" />
-                  <div>
-                    <p className="font-semibold">Builder/Firm</p>
-                    <p className="text-xs opacity-75">Find & bid on projects</p>
-                  </div>
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.button
+            onClick={() => onRoleChange("builder")}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+              selectedRole === "builder"
+                ? "bg-slate-900 text-white shadow-lg"
+                : "border-2 border-slate-300 text-slate-900 hover:border-slate-900"
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Building2 className="w-5 h-5" />
+            Builder
+          </motion.button>
         </div>
       </div>
     </nav>

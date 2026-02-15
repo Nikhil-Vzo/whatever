@@ -16,7 +16,7 @@ const projects = [
     status: "Active",
     bids: 12,
     category: "Residential",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const projects = [
     status: "Active",
     bids: 8,
     category: "Commercial",
-    image: "https://images.unsplash.com/photo-1486323325578-934127991f64?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const projects = [
     status: "Active",
     bids: 15,
     category: "Residential",
-    image: "https://images.unsplash.com/photo-1503387593526-892a80511b53?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3769714/pexels-photo-3769714.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const projects = [
     status: "Active",
     bids: 6,
     category: "Industrial",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3771065/pexels-photo-3771065.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const projects = [
     status: "Active",
     bids: 10,
     category: "Mixed-Use",
-    image: "https://images.unsplash.com/photo-1486682456122-41891cfe3c5c?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3957987/pexels-photo-3957987.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
   {
     id: 6,
@@ -71,7 +71,7 @@ const projects = [
     status: "Active",
     bids: 9,
     category: "Commercial",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&h=400&fit=crop",
+    image: "https://images.pexels.com/photos/3625517/pexels-photo-3625517.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop",
   },
 ];
 
@@ -227,11 +227,14 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         transition={{ duration: 0.3 }}
       >
         {/* Image */}
-        <div className="relative h-48 overflow-hidden bg-slate-200">
+        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-300 to-slate-400">
           <img
             src={project.image}
             alt={project.title}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23cbd5e1' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23475569' text-anchor='middle' dy='.3em'%3EProject Image%3C/text%3E%3C/svg%3E";
+            }}
           />
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"

@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <motion.div className="bg-background text-foreground overflow-x-hidden">
       {/* Navigation */}
-      <Navbar onRoleChange={setUserRole} />
+      <Navbar selectedRole={userRole} onRoleChange={setUserRole} />
 
       {/* Hero Section */}
       <motion.div
@@ -32,19 +32,19 @@ export default function Index() {
       {/* Role-specific sections */}
       {userRole === "customer" ? (
         <>
-          {/* Customer Journey Section */}
+          {/* Customer: Post Projects Section */}
           <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8">
             <ClientJourneySection />
           </section>
 
-          {/* Available Builders Section */}
+          {/* Customer: Browse Builders Section */}
           <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-slate-50">
             <BuilderDiscoverySection />
           </section>
         </>
       ) : (
         <>
-          {/* Builder Discovery Section - Available Projects */}
+          {/* Builder: Browse Projects for Bidding */}
           <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-slate-50">
             <BuilderDiscoverySection isBuilderView={true} />
           </section>

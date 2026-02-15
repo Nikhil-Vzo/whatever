@@ -52,11 +52,14 @@ export default function HeroSection({ userRole = "customer" }: HeroSectionProps)
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 px-4 sm:px-6 lg:px-8"
     >
       {/* Background image */}
-      <div className="absolute inset-0 -z-20">
+      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-slate-100 to-slate-200">
         <img
-          src="https://images.unsplash.com/photo-1487219259396-3ffc1f3e9c08?w=1600&h=900&fit=crop"
+          src="https://images.pexels.com/photos/3831681/pexels-photo-3831681.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
           alt="Construction site"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-30"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.display = "none";
+          }}
         />
       </div>
 
