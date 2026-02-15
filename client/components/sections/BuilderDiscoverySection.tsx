@@ -2,6 +2,10 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { TrendingUp, MapPin, Clock, DollarSign } from "lucide-react";
 
+interface BuilderDiscoverySectionProps {
+  isBuilderView?: boolean;
+}
+
 const projects = [
   {
     id: 1,
@@ -12,6 +16,7 @@ const projects = [
     status: "Active",
     bids: 12,
     category: "Residential",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=400&fit=crop",
   },
   {
     id: 2,
@@ -22,6 +27,7 @@ const projects = [
     status: "Active",
     bids: 8,
     category: "Commercial",
+    image: "https://images.unsplash.com/photo-1486323325578-934127991f64?w=500&h=400&fit=crop",
   },
   {
     id: 3,
@@ -32,6 +38,7 @@ const projects = [
     status: "Active",
     bids: 15,
     category: "Residential",
+    image: "https://images.unsplash.com/photo-1503387593526-892a80511b53?w=500&h=400&fit=crop",
   },
   {
     id: 4,
@@ -42,6 +49,7 @@ const projects = [
     status: "Active",
     bids: 6,
     category: "Industrial",
+    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=400&fit=crop",
   },
   {
     id: 5,
@@ -52,6 +60,7 @@ const projects = [
     status: "Active",
     bids: 10,
     category: "Mixed-Use",
+    image: "https://images.unsplash.com/photo-1486682456122-41891cfe3c5c?w=500&h=400&fit=crop",
   },
   {
     id: 6,
@@ -62,10 +71,13 @@ const projects = [
     status: "Active",
     bids: 9,
     category: "Commercial",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&h=400&fit=crop",
   },
 ];
 
-export default function BuilderDiscoverySection() {
+export default function BuilderDiscoverySection({
+  isBuilderView = false,
+}: BuilderDiscoverySectionProps) {
   const [filter, setFilter] = useState<string | null>(null);
 
   const containerVariants = {
@@ -103,10 +115,12 @@ export default function BuilderDiscoverySection() {
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Discover Projects
+            {isBuilderView ? "Active Projects for Bidding" : "Trusted Builders Network"}
           </h2>
           <p className="text-lg text-slate-600">
-            Browse active projects and submit your bid
+            {isBuilderView
+              ? "Browse quality construction projects and submit competitive bids"
+              : "Connect with verified builders and firms"}
           </p>
         </motion.div>
 
@@ -199,7 +213,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.6, ease: "easeOut" },
+          transition: { duration: 0.6 },
         },
       }}
       onMouseMove={handleMouseMove}
@@ -208,17 +222,30 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       className="group relative"
     >
       <motion.div
-        className="glass rounded-2xl p-6 h-full space-y-4 cursor-pointer relative overflow-hidden premium-shadow hover:premium-shadow-lg transition-shadow"
+        className="glass rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer relative premium-shadow hover:premium-shadow-lg transition-shadow"
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3 }}
       >
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden bg-slate-200">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+            layoutId="gradient"
+          />
+        </div>
+
         {/* Background glow */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-gold-400/0 to-gold-300/0 group-hover:from-gold-400/10 group-hover:to-gold-300/5 opacity-0 group-hover:opacity-100 transition-opacity"
           layoutId="glow"
         />
 
-        <div className="relative z-10 space-y-4">
+        <div className="relative z-10 space-y-4 p-6 flex-1 flex flex-col">
           {/* Header */}
           <div className="space-y-2">
             <div className="flex items-start justify-between">
@@ -261,10 +288,10 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-slate-200 group-hover:bg-gold-200 transition-colors" />
+          <div className="h-px bg-slate-200 group-hover:bg-gold-200 transition-colors mt-auto" />
 
           {/* Footer */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between pt-2">
             <div className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-gold-400" />
               <span className="text-sm font-medium text-slate-700">

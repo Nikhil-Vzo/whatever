@@ -1,31 +1,59 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Zap, Users, Target, Trophy } from "lucide-react";
+import type { UserRole } from "@/components/Navbar";
 
-const steps = [
+interface StorySectionProps {
+  userRole?: UserRole;
+}
+
+const customerSteps = [
   {
     icon: Zap,
-    title: "Post Your Dream",
-    description: "Share your construction vision with rich details and requirements.",
+    title: "Post Your Project",
+    description: "Share your construction vision with detailed requirements and budget.",
   },
   {
     icon: Users,
-    title: "Meet Builders",
-    description: "Connect with vetted professionals eager to bring your project to life.",
+    title: "Get Qualified Bids",
+    description: "Receive competitive bids from vetted builders in your area.",
   },
   {
     icon: Target,
-    title: "Collaborate",
-    description: "Work together seamlessly with integrated communication and planning tools.",
+    title: "Compare & Negotiate",
+    description: "Review proposals and negotiate terms directly with selected builders.",
   },
   {
     icon: Trophy,
     title: "Build Excellence",
-    description: "Watch your vision transform into architectural reality with precision.",
+    description: "Execute your project with expert oversight and quality assurance.",
   },
 ];
 
-export default function StorySection() {
+const builderSteps = [
+  {
+    icon: Zap,
+    title: "Browse Projects",
+    description: "Discover high-quality construction projects matched to your expertise.",
+  },
+  {
+    icon: Users,
+    title: "Submit Competitive Bids",
+    description: "Present your pricing, timeline, and approach to project owners.",
+  },
+  {
+    icon: Target,
+    title: "Win & Negotiate",
+    description: "Communicate directly with clients and finalize project terms.",
+  },
+  {
+    icon: Trophy,
+    title: "Execute & Grow",
+    description: "Deliver excellence and build your reputation on the platform.",
+  },
+];
+
+export default function StorySection({ userRole = "customer" }: StorySectionProps) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -78,7 +106,7 @@ export default function StorySection() {
         viewport={{ once: true, amount: 0.1 }}
         className="space-y-16"
       >
-        {steps.map((step, index) => {
+        {(userRole === "customer" ? customerSteps : builderSteps).map((step, index) => {
           const Icon = step.icon;
           const offsetIndex = useTransform(
             scrollYProgress,

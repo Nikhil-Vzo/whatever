@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Rubik", "var(--font-heading)", "sans-serif"],
+        heading: ["Sora", "var(--font-heading)", "sans-serif"],
         body: ["Inter", "var(--font-body)", "sans-serif"],
-        accent: ["Crimson Text", "var(--font-accent)", "serif"],
+        accent: ["Sora", "var(--font-accent)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

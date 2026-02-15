@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mail, Linkedin, Twitter } from "lucide-react";
+import type { UserRole } from "@/components/Navbar";
 
-export default function FinaleSection() {
+interface FinaleSectionProps {
+  userRole?: UserRole;
+}
+
+export default function FinaleSection({ userRole = "customer" }: FinaleSectionProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -40,14 +45,16 @@ export default function FinaleSection() {
           variants={itemVariants}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight"
         >
-          The Future of
+          {userRole === "customer"
+            ? "Your Vision, Built Right"
+            : "Your Next Project Awaits"}
           <br />
           <motion.span
             className="bg-gradient-to-r from-gold-300 to-gold-400 bg-clip-text text-transparent"
             animate={{ opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            Construction
+            on CivilConnect
           </motion.span>
         </motion.h2>
 
@@ -55,8 +62,9 @@ export default function FinaleSection() {
           variants={itemVariants}
           className="text-lg text-slate-300 max-w-xl mx-auto leading-relaxed"
         >
-          Join thousands of visionary clients and exceptional builders creating
-          architectural excellence together.
+          {userRole === "customer"
+            ? "Connect with top-tier builders and firms to bring your construction dreams to life with quality and precision."
+            : "Access high-quality projects, compete fairly, and grow your construction business on India's leading platform."}
         </motion.p>
       </motion.div>
 
@@ -74,7 +82,7 @@ export default function FinaleSection() {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
-          Start Your Project
+          {userRole === "customer" ? "Post Your First Project" : "Browse Available Bids"}
           <ArrowRight className="w-5 h-5" />
         </motion.button>
 
@@ -84,7 +92,7 @@ export default function FinaleSection() {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
-          Explore as Builder
+          {userRole === "customer" ? "Find Builders" : "View My Proposals"}
         </motion.button>
       </motion.div>
 

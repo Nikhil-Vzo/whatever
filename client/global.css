@@ -1,5 +1,5 @@
 /** @import must precede all other statements */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@500;600;700;800&family=Crimson+Text:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -11,54 +11,54 @@
    * Charcoal, concrete gray, warm sand, and subtle gold accents
    */
   :root {
-    /* Color palette */
-    --background: 0 0% 97.5%;
-    --foreground: 225 8% 13%;
+    /* Industrial construction color palette */
+    --background: 210 15% 97%;
+    --foreground: 210 20% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 225 8% 13%;
+    --card-foreground: 210 20% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 225 8% 13%;
+    --popover-foreground: 210 20% 16%;
 
-    --primary: 225 8% 13%;
+    --primary: 210 20% 16%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 20 12% 87%;
-    --secondary-foreground: 225 8% 13%;
+    --secondary: 210 15% 85%;
+    --secondary-foreground: 210 20% 16%;
 
-    --muted: 225 8% 60%;
-    --muted-foreground: 225 8% 30%;
+    --muted: 210 10% 60%;
+    --muted-foreground: 210 10% 30%;
 
-    --accent: 32 68% 56%;
-    --accent-foreground: 225 8% 13%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 210 20% 16%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 225 8% 88%;
+    --border: 210 15% 88%;
     --input: 0 0% 100%;
-    --ring: 225 8% 13%;
+    --ring: 210 20% 16%;
 
     --radius: 0.5rem;
 
-    /* Premium slate palette */
-    --slate-50: 225 8% 97.5%;
-    --slate-100: 225 8% 93%;
-    --slate-200: 225 8% 88%;
-    --slate-300: 225 8% 78%;
-    --slate-400: 225 8% 60%;
-    --slate-600: 225 8% 40%;
-    --slate-700: 225 8% 25%;
-    --slate-800: 225 8% 18%;
-    --slate-900: 225 8% 13%;
+    /* Industrial slate palette - Construction theme */
+    --slate-50: 210 20% 97%;
+    --slate-100: 210 18% 93%;
+    --slate-200: 210 16% 88%;
+    --slate-300: 210 14% 80%;
+    --slate-400: 210 12% 65%;
+    --slate-600: 210 10% 45%;
+    --slate-700: 210 12% 30%;
+    --slate-800: 210 15% 20%;
+    --slate-900: 210 20% 16%;
 
-    /* Gold accent palette */
-    --gold-50: 35 100% 95%;
-    --gold-100: 35 88% 88%;
-    --gold-300: 34 68% 72%;
-    --gold-400: 32 68% 56%;
-    --gold-500: 30 65% 50%;
+    /* Safety orange accent palette - construction standard */
+    --gold-50: 25 100% 96%;
+    --gold-100: 25 98% 92%;
+    --gold-300: 25 97% 72%;
+    --gold-400: 25 95% 53%;
+    --gold-500: 25 90% 48%;
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
@@ -71,58 +71,58 @@
     --sidebar-ring: 32 68% 56%;
 
     /* Typography */
-    --font-heading: "Rubik";
+    --font-heading: "Sora";
     --font-body: "Inter";
-    --font-accent: "Crimson Text";
+    --font-accent: "Sora";
   }
 
   .dark {
-    --background: 225 8% 13%;
-    --foreground: 0 0% 97%;
+    --background: 210 20% 14%;
+    --foreground: 210 15% 95%;
 
-    --card: 225 8% 20%;
-    --card-foreground: 0 0% 97%;
+    --card: 210 18% 22%;
+    --card-foreground: 210 15% 95%;
 
-    --popover: 225 8% 20%;
-    --popover-foreground: 0 0% 97%;
+    --popover: 210 18% 22%;
+    --popover-foreground: 210 15% 95%;
 
-    --primary: 0 0% 97%;
-    --primary-foreground: 225 8% 13%;
+    --primary: 210 15% 95%;
+    --primary-foreground: 210 20% 14%;
 
-    --secondary: 225 8% 25%;
-    --secondary-foreground: 0 0% 97%;
+    --secondary: 210 16% 28%;
+    --secondary-foreground: 210 15% 95%;
 
-    --muted: 225 8% 50%;
-    --muted-foreground: 0 0% 75%;
+    --muted: 210 12% 55%;
+    --muted-foreground: 210 12% 75%;
 
-    --accent: 32 68% 56%;
-    --accent-foreground: 225 8% 13%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 210 20% 14%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 225 8% 25%;
-    --input: 225 8% 20%;
-    --ring: 32 68% 56%;
+    --border: 210 16% 28%;
+    --input: 210 18% 22%;
+    --ring: 25 95% 53%;
 
-    --slate-50: 225 8% 97.5%;
-    --slate-100: 225 8% 93%;
-    --slate-200: 225 8% 30%;
-    --slate-300: 225 8% 35%;
-    --slate-400: 225 8% 50%;
-    --slate-600: 225 8% 70%;
-    --slate-700: 225 8% 80%;
-    --slate-800: 225 8% 90%;
-    --slate-900: 225 8% 97%;
+    --slate-50: 210 20% 97%;
+    --slate-100: 210 18% 93%;
+    --slate-200: 210 16% 32%;
+    --slate-300: 210 14% 38%;
+    --slate-400: 210 12% 50%;
+    --slate-600: 210 12% 68%;
+    --slate-700: 210 14% 78%;
+    --slate-800: 210 16% 88%;
+    --slate-900: 210 18% 95%;
 
-    --sidebar-background: 225 8% 13%;
-    --sidebar-foreground: 0 0% 97%;
-    --sidebar-primary: 0 0% 97%;
-    --sidebar-primary-foreground: 225 8% 13%;
-    --sidebar-accent: 32 68% 56%;
-    --sidebar-accent-foreground: 225 8% 13%;
-    --sidebar-border: 225 8% 25%;
-    --sidebar-ring: 32 68% 56%;
+    --sidebar-background: 210 20% 14%;
+    --sidebar-foreground: 210 15% 95%;
+    --sidebar-primary: 210 15% 95%;
+    --sidebar-primary-foreground: 210 20% 14%;
+    --sidebar-accent: 25 95% 53%;
+    --sidebar-accent-foreground: 210 20% 14%;
+    --sidebar-border: 210 16% 28%;
+    --sidebar-ring: 25 95% 53%;
   }
 }
 

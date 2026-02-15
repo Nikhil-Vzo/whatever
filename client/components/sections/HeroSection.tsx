@@ -1,8 +1,13 @@
 import { motion, useMotionTemplate, useMotionValue, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import type { UserRole } from "@/components/Navbar";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  userRole?: UserRole;
+}
+
+export default function HeroSection({ userRole = "customer" }: HeroSectionProps) {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -46,10 +51,19 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 px-4 sm:px-6 lg:px-8"
     >
-      {/* Animated gradient background */}
+      {/* Background image */}
+      <div className="absolute inset-0 -z-20">
+        <img
+          src="https://images.unsplash.com/photo-1487219259396-3ffc1f3e9c08?w=1600&h=900&fit=crop"
+          alt="Construction site"
+          className="w-full h-full object-cover opacity-20"
+        />
+      </div>
+
+      {/* Animated gradient overlay */}
       <div className="absolute inset-0 -z-10">
         <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-gold-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+          className="absolute top-0 left-0 w-96 h-96 bg-gold-400 rounded-full mix-blend-multiply filter blur-3xl opacity-8"
           animate={{
             y: [0, 30, 0],
             x: [0, 30, 0],
@@ -61,7 +75,7 @@ export default function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-slate-800 rounded-full mix-blend-multiply filter blur-3xl opacity-5"
+          className="absolute bottom-0 right-0 w-96 h-96 bg-slate-800 rounded-full mix-blend-multiply filter blur-3xl opacity-3"
           animate={{
             y: [0, -30, 0],
             x: [0, -30, 0],
@@ -139,41 +153,69 @@ export default function HeroSection() {
           variants={itemVariants}
           className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight"
         >
-          <motion.span
-            className="inline-block"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            Where
-          </motion.span>{" "}
-          <motion.span
-            className="inline-block relative"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            Construction
-            <motion.div
-              className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-accent rounded-full"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            />
-          </motion.span>{" "}
-          <motion.span
-            className="inline-block"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            Dreams
-          </motion.span>
-          <br />
-          <motion.span
-            className="inline-block"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            Become Reality
-          </motion.span>
+          {userRole === "customer" ? (
+            <>
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                Find the Right
+              </motion.span>{" "}
+              <motion.span
+                className="inline-block relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                Builders
+                <motion.div
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-accent rounded-full"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                />
+              </motion.span>{" "}
+              <br />
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                For Your Vision
+              </motion.span>
+            </>
+          ) : (
+            <>
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                Discover Quality
+              </motion.span>{" "}
+              <motion.span
+                className="inline-block relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                Projects
+                <motion.div
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-accent rounded-full"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                />
+              </motion.span>{" "}
+              <br />
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                to Bid On
+              </motion.span>
+            </>
+          )}
         </motion.h1>
 
         {/* Description */}
@@ -181,8 +223,9 @@ export default function HeroSection() {
           variants={itemVariants}
           className="text-lg sm:text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          Connect visionary clients with exceptional builders. CivilConnect is
-          the platform where ambitious projects meet masterful execution.
+          {userRole === "customer"
+            ? "Post your construction projects and get matched with vetted builders who bring excellence to every build."
+            : "Access high-quality construction projects and showcase your expertise. Bid, negotiate, and grow your firm."}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -195,7 +238,7 @@ export default function HeroSection() {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Post a Project
+            {userRole === "customer" ? "Post a Project" : "Browse Projects"}
             <ArrowRight className="w-5 h-5" />
           </motion.button>
 
@@ -204,7 +247,7 @@ export default function HeroSection() {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Discover Projects
+            {userRole === "customer" ? "Find Builders" : "View Your Bids"}
           </motion.button>
         </motion.div>
       </motion.div>
