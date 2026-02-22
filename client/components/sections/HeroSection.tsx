@@ -1,4 +1,4 @@
-import { motion, useMotionTemplate, useMotionValue, useScroll } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import type { UserRole } from "@/components/Navbar";
@@ -9,9 +9,6 @@ interface HeroSectionProps {
 
 export default function HeroSection({ userRole = "customer" }: HeroSectionProps) {
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -31,192 +28,92 @@ export default function HeroSection({ userRole = "customer" }: HeroSectionProps)
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8 },
+      transition: { duration: 0.8, ease: "easeOut" },
     },
   };
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 px-4 sm:px-6 lg:px-8"
+      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8"
     >
-      {/* Background image */}
-      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-slate-100 to-slate-200">
-        <img
-          src="https://images.pexels.com/photos/3831681/pexels-photo-3831681.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-          alt="Construction site"
-          className="w-full h-full object-cover opacity-30"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
-      </div>
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 bg-background overflow-hidden">
+        {/* Premium Skyscraper Construction Video - PC Only */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="hidden sm:block absolute inset-0 w-full h-full object-cover opacity-[0.25]"
+        >
+          <source
+            src="https://player.vimeo.com/external/494252666.sd.mp4?s=7249419ab0d5079c6d44521873e3bf1a98089456&profile_id=165&oauth2_token_id=57447761"
+            type="video/mp4"
+          />
+        </video>
 
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 -z-10">
+        {/* Dynamic Glow Overlay */}
         <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-gold-400 rounded-full mix-blend-multiply filter blur-3xl opacity-8"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
+          className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_50%,rgba(184,134,11,0.08),transparent_70%)]"
+          style={{
+            x: useTransform(mouseX, [0, 2000], [-15, 15]),
+            y: useTransform(mouseY, [0, 1000], [-15, 15]),
           }}
         />
-        <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-slate-800 rounded-full mix-blend-multiply filter blur-3xl opacity-3"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
+
+        {/* Grain/Noise Texture */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
-
-      {/* Floating geometric shapes */}
-      <motion.div
-        className="absolute top-20 left-10 w-32 h-32 border-2 border-slate-200 rounded-lg opacity-20"
-        animate={{
-          rotate: 360,
-          y: [0, -20, 0],
-        }}
-        transition={{
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-          y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-        }}
-      />
-
-      <motion.div
-        className="absolute bottom-32 right-20 w-24 h-24 border-2 border-gold-300 opacity-20"
-        animate={{
-          rotate: -360,
-          y: [0, 20, 0],
-        }}
-        transition={{
-          rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-          y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
-        }}
-      />
-
-      <motion.div
-        className="absolute top-1/2 right-1/4 w-40 h-40 border border-slate-300 opacity-10"
-        style={{
-          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-        }}
-        animate={{
-          rotate: [0, 45, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
 
       {/* Main content */}
       <motion.div
-        className="relative z-10 max-w-4xl text-center"
+        className="relative z-10 max-w-6xl text-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Subtitle */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <motion.div
-            className="inline-block px-4 py-2 rounded-full border border-gold-300 bg-gold-50"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="text-sm font-medium text-slate-700">
-              ✨ The Future of Construction Collaboration
-            </p>
-          </motion.div>
-        </motion.div>
-
         {/* Main headline */}
         <motion.h1
           variants={itemVariants}
-          className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight"
+          className="font-heading text-4xl sm:text-7xl lg:text-9xl font-black text-foreground mb-6 sm:mb-8 leading-[0.9] sm:leading-[0.85] tracking-tighter"
         >
           {userRole === "customer" ? (
             <>
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                Find the Right
-              </motion.span>{" "}
-              <motion.span
-                className="inline-block relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                Builders
+              Your Vision, <span className="text-primary italic">Refined</span>. <br className="hidden sm:block" />
+              <span className="relative inline-block mt-1 sm:mt-2">
+                Built to Last
                 <motion.div
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-accent rounded-full"
+                  className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-[1.5px] sm:h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.8, duration: 0.8 }}
+                  transition={{ delay: 1, duration: 1.5 }}
                 />
-              </motion.span>{" "}
-              <br />
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                For Your Vision
-              </motion.span>
+              </span>
             </>
           ) : (
             <>
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                Discover Quality
-              </motion.span>{" "}
-              <motion.span
-                className="inline-block relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                Projects
+              Elevate Your <span className="text-primary italic">Legacy</span>. <br className="hidden sm:block" />
+              <span className="relative inline-block mt-1 sm:mt-2">
+                Win Bigger
                 <motion.div
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-accent rounded-full"
+                  className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-[1.5px] sm:h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.8, duration: 0.8 }}
+                  transition={{ delay: 1, duration: 1.5 }}
                 />
-              </motion.span>{" "}
-              <br />
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                to Bid On
-              </motion.span>
+              </span>
             </>
           )}
         </motion.h1>
@@ -224,48 +121,35 @@ export default function HeroSection({ userRole = "customer" }: HeroSectionProps)
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg sm:text-2xl text-foreground/50 mb-8 sm:mb-12 max-w-3xl mx-auto font-medium leading-relaxed px-4"
         >
           {userRole === "customer"
-            ? "Post your construction projects and get matched with vetted builders who bring excellence to every build."
-            : "Access high-quality construction projects and showcase your expertise. Bid, negotiate, and grow your firm."}
+            ? "Collaborate with high-end builders who transform architecture into living art."
+            : "Access exclusive high-ticket projects and demonstrate your firm's technical mastery."}
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center px-4"
         >
           <motion.button
-            className="px-8 py-4 bg-slate-900 text-white rounded-lg font-semibold flex items-center gap-2 premium-shadow hover:bg-slate-800 transition-colors"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="w-full sm:w-auto group px-8 sm:px-12 py-4 sm:py-5 bg-primary text-primary-foreground rounded-full font-black flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(184,134,11,0.25)]"
+            whileHover={{ scale: 1.05, y: -4 }}
             whileTap={{ scale: 0.95 }}
           >
-            {userRole === "customer" ? "Post a Project" : "Browse Projects"}
-            <ArrowRight className="w-5 h-5" />
+            {userRole === "customer" ? "Post Your Project" : "Explore Projects"}
+            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
           </motion.button>
 
           <motion.button
-            className="px-8 py-4 border-2 border-slate-900 text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-white/5 backdrop-blur-2xl border border-white/5 text-foreground/80 rounded-full font-black hover:bg-white/10 transition-all font-heading tracking-widest uppercase text-[10px] sm:text-sm"
+            whileHover={{ scale: 1.05, y: -4 }}
             whileTap={{ scale: 0.95 }}
           >
-            {userRole === "customer" ? "Find Builders" : "View Your Bids"}
+            {userRole === "customer" ? "Exquisite Builders" : "Review Proposals"}
           </motion.button>
         </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <ChevronDown className="w-6 h-6 text-slate-400" />
       </motion.div>
     </section>
   );

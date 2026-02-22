@@ -1,128 +1,66 @@
-/** @import must precede all other statements */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /**
-   * Premium CivilConnect color palette
-   * Charcoal, concrete gray, warm sand, and subtle gold accents
-   */
   :root {
-    /* Industrial construction color palette */
-    --background: 210 15% 97%;
-    --foreground: 210 20% 16%;
+    /* Sophisticated Elegant Palette (Midnight & Gold) */
+    --background: 240 10% 4%;
+    /* Midnight Obsidian */
+    --foreground: 40 20% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 20% 16%;
+    --card: 240 10% 6%;
+    --card-foreground: 40 10% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 20% 16%;
+    --popover: 240 10% 5%;
+    --popover-foreground: 40 10% 90%;
 
-    --primary: 210 20% 16%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 43 70% 50%;
+    /* Brushed Gold */
+    --primary-foreground: 240 10% 4%;
 
-    --secondary: 210 15% 85%;
-    --secondary-foreground: 210 20% 16%;
+    --secondary: 240 5% 15%;
+    /* Shadow Midnight */
+    --secondary-foreground: 43 70% 90%;
 
-    --muted: 210 10% 60%;
-    --muted-foreground: 210 10% 30%;
+    --muted: 240 5% 25%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 25 95% 53%;
-    --accent-foreground: 210 20% 16%;
+    --accent: 43 30% 90%;
+    /* Soft Champagne */
+    --accent-foreground: 240 10% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 210 15% 88%;
-    --input: 0 0% 100%;
-    --ring: 210 20% 16%;
+    --border: 240 5% 12%;
+    --input: 240 5% 8%;
+    --ring: 43 70% 50%;
 
     --radius: 0.5rem;
 
-    /* Industrial slate palette - Construction theme */
-    --slate-50: 210 20% 97%;
-    --slate-100: 210 18% 93%;
-    --slate-200: 210 16% 88%;
-    --slate-300: 210 14% 80%;
-    --slate-400: 210 12% 65%;
-    --slate-600: 210 10% 45%;
-    --slate-700: 210 12% 30%;
-    --slate-800: 210 15% 20%;
-    --slate-900: 210 20% 16%;
-
-    /* Safety orange accent palette - construction standard */
-    --gold-50: 25 100% 96%;
-    --gold-100: 25 98% 92%;
-    --gold-300: 25 97% 72%;
-    --gold-400: 25 95% 53%;
-    --gold-500: 25 90% 48%;
-
-    /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 225 8% 13%;
-    --sidebar-primary: 225 8% 13%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 32 68% 56%;
-    --sidebar-accent-foreground: 225 8% 13%;
-    --sidebar-border: 225 8% 88%;
-    --sidebar-ring: 32 68% 56%;
-
-    /* Typography */
-    --font-heading: "Sora";
+    /* Typographic Configuration */
+    --font-heading: "Outfit";
     --font-body: "Inter";
-    --font-accent: "Sora";
   }
 
-  .dark {
-    --background: 210 20% 14%;
-    --foreground: 210 15% 95%;
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
 
-    --card: 210 18% 22%;
-    --card-foreground: 210 15% 95%;
+    --card: 0 0% 98%;
+    --card-foreground: 220 20% 10%;
 
-    --popover: 210 18% 22%;
-    --popover-foreground: 210 15% 95%;
+    --primary: 48 100% 50%;
+    --primary-foreground: 220 20% 10%;
 
-    --primary: 210 15% 95%;
-    --primary-foreground: 210 20% 14%;
+    --secondary: 25 100% 50%;
+    --secondary-foreground: 220 20% 10%;
 
-    --secondary: 210 16% 28%;
-    --secondary-foreground: 210 15% 95%;
-
-    --muted: 210 12% 55%;
-    --muted-foreground: 210 12% 75%;
-
-    --accent: 25 95% 53%;
-    --accent-foreground: 210 20% 14%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 210 16% 28%;
-    --input: 210 18% 22%;
-    --ring: 25 95% 53%;
-
-    --slate-50: 210 20% 97%;
-    --slate-100: 210 18% 93%;
-    --slate-200: 210 16% 32%;
-    --slate-300: 210 14% 38%;
-    --slate-400: 210 12% 50%;
-    --slate-600: 210 12% 68%;
-    --slate-700: 210 14% 78%;
-    --slate-800: 210 16% 88%;
-    --slate-900: 210 18% 95%;
-
-    --sidebar-background: 210 20% 14%;
-    --sidebar-foreground: 210 15% 95%;
-    --sidebar-primary: 210 15% 95%;
-    --sidebar-primary-foreground: 210 20% 14%;
-    --sidebar-accent: 25 95% 53%;
-    --sidebar-accent-foreground: 210 20% 14%;
-    --sidebar-border: 210 16% 28%;
-    --sidebar-ring: 25 95% 53%;
+    --border: 220 10% 90%;
+    --input: 0 0% 100%;
   }
 }
 
@@ -139,14 +77,19 @@
     @apply bg-background text-foreground;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
+
 
   h1 {
     @apply text-5xl sm:text-6xl lg:text-7xl;
@@ -194,5 +137,68 @@
 
   .gradient-accent {
     @apply bg-gradient-to-r from-gold-400 to-gold-500;
+  }
+
+  /* Custom Site Loader - Elegant Midnight & Gold */
+  .loader-container {
+    @apply fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-xl transition-all duration-700;
+  }
+
+  .loader {
+    width: 90px;
+    height: 14px;
+    box-shadow: 0 3px 0 hsl(var(--primary));
+    position: relative;
+    clip-path: inset(-40px 0 -5px);
+  }
+
+  .loader:before {
+    content: "";
+    position: absolute;
+    inset: auto calc(50% - 17px) 0;
+    height: 50px;
+    --g: no-repeat linear-gradient(hsl(var(--primary)) 0 0);
+    background: var(--g), var(--g), var(--g), var(--g);
+    background-size: 16px 14px;
+    animation:
+      l7-1 2s infinite linear,
+      l7-2 2s infinite linear;
+  }
+
+  @keyframes l7-1 {
+
+    0%,
+    100% {
+      background-position: 0 -50px, 100% -50px;
+    }
+
+    17.5% {
+      background-position: 0 100%, 100% -50px, 0 -50px, 100% -50px;
+    }
+
+    35% {
+      background-position: 0 100%, 100% 100%, 0 -50px, 100% -50px;
+    }
+
+    52.5% {
+      background-position: 0 100%, 100% 100%, 0 calc(100% - 16px), 100% -50px;
+    }
+
+    70%,
+    98% {
+      background-position: 0 100%, 100% 100%, 0 calc(100% - 16px), 100% calc(100% - 16px);
+    }
+  }
+
+  @keyframes l7-2 {
+
+    0%,
+    70% {
+      transform: translate(0);
+    }
+
+    100% {
+      transform: translate(200%);
+    }
   }
 }
