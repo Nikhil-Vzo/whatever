@@ -1,49 +1,52 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Sophisticated Elegant Palette (Midnight & Gold) */
-    --background: 240 10% 4%;
-    /* Midnight Obsidian */
-    --foreground: 40 20% 98%;
+    /* Grayscale Palette */
+    --background: 0 0% 10%;
+    /* #1a1a1a */
+    --foreground: 0 0% 95%;
+    /* #f2f2f2 */
 
-    --card: 240 10% 6%;
-    --card-foreground: 40 10% 90%;
+    --card: 200 92% 10%;
+    /* #022333 */
+    --card-foreground: 0 0% 90%;
 
-    --popover: 240 10% 5%;
-    --popover-foreground: 40 10% 90%;
+    --popover: 200 92% 10%;
+    --popover-foreground: 0 0% 90%;
 
-    --primary: 43 70% 50%;
-    /* Brushed Gold */
-    --primary-foreground: 240 10% 4%;
+    --primary: 0 0% 95%;
+    /* #f2f2f2 */
+    --primary-foreground: 0 0% 10%;
+    /* #1a1a1a */
 
-    --secondary: 240 5% 15%;
-    /* Shadow Midnight */
-    --secondary-foreground: 43 70% 90%;
+    --secondary: 0 0% 29%;
+    /* #4a4a4a */
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 240 5% 25%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 0 0% 29%;
+    --muted-foreground: 0 0% 63%;
+    /* #a1a1a1 */
 
-    --accent: 43 30% 90%;
-    /* Soft Champagne */
-    --accent-foreground: 240 10% 4%;
+    --accent: 0 0% 63%;
+    /* #a1a1a1 */
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5% 12%;
-    --input: 240 5% 8%;
-    --ring: 43 70% 50%;
+    --border: 0 0% 29%;
+    --input: 200 92% 10%;
+    /* #022333 */
+    --ring: 0 0% 95%;
 
     --radius: 0.5rem;
 
     /* Typographic Configuration */
-    --font-heading: "Outfit";
-    --font-body: "Inter";
+    --font-heading: "Cinzel";
+    --font-body: "Quicksand";
   }
 
   .light {
