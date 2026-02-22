@@ -10,54 +10,52 @@ interface NavbarProps {
 
 export default function Navbar({ selectedRole, onRoleChange }: NavbarProps) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        {/* Logo */}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-2xl border-b border-primary/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
         <motion.div
-          className="flex items-center gap-2"
-          whileHover={{ scale: 1.05 }}
+          className="flex items-center gap-3 sm:gap-4"
+          whileHover={{ scale: 1.02 }}
         >
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-            <Building2 className="w-6 h-6 text-white" />
-          </div>
-          <span className="font-heading text-xl font-bold text-slate-900">
-            CivilConnect
+          <img
+            src="/logo.png"
+            alt="CivilConnect Logo"
+            className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+          />
+          <span className="font-heading text-xl sm:text-2xl font-black tracking-tighter text-foreground">
+            Civil<span className="text-primary italic">Connect</span>
           </span>
         </motion.div>
 
-        {/* Right side - Direct role selection */}
-        <div className="flex gap-3">
+        {/* Role selection */}
+        <div className="flex gap-1 sm:gap-2 p-1 bg-primary/5 rounded-2xl border border-primary/10 w-full sm:w-auto overflow-x-auto no-scrollbar">
           <motion.button
             onClick={() => onRoleChange("customer")}
-            className={`px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
-              selectedRole === "customer"
-                ? "bg-slate-900 text-white shadow-lg"
-                : "border-2 border-slate-300 text-slate-900 hover:border-slate-900"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${selectedRole === "customer"
+              ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(184,134,11,0.2)] border border-primary/20"
+              : "text-foreground/40 hover:text-foreground hover:bg-primary/5"
+              }`}
+            whileTap={{ scale: 0.98 }}
           >
-            <Users className="w-5 h-5" />
-            Customer
+            <Users className="w-4 h-4" />
+            <span className="text-[10px] sm:text-sm uppercase tracking-widest">Customer</span>
           </motion.button>
 
           <motion.button
             onClick={() => onRoleChange("builder")}
-            className={`px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
-              selectedRole === "builder"
-                ? "bg-slate-900 text-white shadow-lg"
-                : "border-2 border-slate-300 text-slate-900 hover:border-slate-900"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${selectedRole === "builder"
+              ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(184,134,11,0.2)] border border-primary/20"
+              : "text-foreground/40 hover:text-foreground hover:bg-primary/5"
+              }`}
+            whileTap={{ scale: 0.98 }}
           >
-            <Building2 className="w-5 h-5" />
-            Builder
+            <Building2 className="w-4 h-4" />
+            <span className="text-[10px] sm:text-sm uppercase tracking-widest">Builder</span>
           </motion.button>
         </div>
       </div>
     </nav>
   );
 }
+
 
 export type { UserRole };

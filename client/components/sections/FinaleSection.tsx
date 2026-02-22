@@ -25,34 +25,34 @@ export default function FinaleSection({ userRole = "customer" }: FinaleSectionPr
   };
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-32">
       {/* Main message */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="text-center space-y-8"
+        className="text-center space-y-12"
       >
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl text-slate-300"
+          className="text-sm font-black uppercase tracking-[0.5em] text-primary"
         >
-          Where ambitious projects meet exceptional builders
+          The Pinnacle of Construction
         </motion.p>
 
         <motion.h2
           variants={itemVariants}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight"
+          className="text-4xl sm:text-7xl lg:text-9xl font-black text-foreground leading-[0.9] sm:leading-[0.85] tracking-tighter"
         >
           {userRole === "customer"
-            ? "Your Vision, Built Right"
-            : "Your Next Project Awaits"}
+            ? "Your Vision, Refined."
+            : "Your Next Legacy Awaits."}
           <br />
           <motion.span
-            className="bg-gradient-to-r from-gold-300 to-gold-400 bg-clip-text text-transparent"
+            className="text-primary italic font-heading"
             animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 3, repeat: Infinity }}
+            transition={{ duration: 5, repeat: Infinity }}
           >
             on CivilConnect
           </motion.span>
@@ -60,11 +60,11 @@ export default function FinaleSection({ userRole = "customer" }: FinaleSectionPr
 
         <motion.p
           variants={itemVariants}
-          className="text-lg text-slate-300 max-w-xl mx-auto leading-relaxed"
+          className="text-lg sm:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-medium px-4"
         >
           {userRole === "customer"
-            ? "Connect with top-tier builders and firms to bring your construction dreams to life with quality and precision."
-            : "Access high-quality projects, compete fairly, and grow your construction business on India's leading platform."}
+            ? "Join an elite network of project owners who demand nothing less than architectural perfection."
+            : "Collaborate on India's most prestigious projects and define the landscape of tomorrow."}
         </motion.p>
       </motion.div>
 
@@ -74,107 +74,68 @@ export default function FinaleSection({ userRole = "customer" }: FinaleSectionPr
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+        className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center px-4"
       >
         <motion.button
           variants={itemVariants}
-          className="px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold flex items-center gap-2 hover:bg-slate-100 transition-colors"
-          whileHover={{ scale: 1.05, y: -2 }}
+          className="w-full sm:w-auto px-10 sm:px-14 py-5 sm:py-6 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-widest text-sm shadow-[0_20px_50px_rgba(184,134,11,0.25)] flex items-center justify-center"
+          whileHover={{ scale: 1.05, y: -4 }}
           whileTap={{ scale: 0.95 }}
         >
-          {userRole === "customer" ? "Post Your First Project" : "Browse Available Bids"}
-          <ArrowRight className="w-5 h-5" />
+          {userRole === "customer" ? "Initiate Your Project" : "Access Projects"}
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2" />
         </motion.button>
 
         <motion.button
           variants={itemVariants}
-          className="px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
-          whileHover={{ scale: 1.05, y: -2 }}
+          className="w-full sm:w-auto px-10 sm:px-14 py-5 sm:py-6 bg-white/5 backdrop-blur-3xl border border-white/5 text-foreground/60 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center"
+          whileHover={{ scale: 1.05, y: -4, color: "white" }}
           whileTap={{ scale: 0.95 }}
         >
-          {userRole === "customer" ? "Find Builders" : "View My Proposals"}
+          {userRole === "customer" ? "Elite Builders" : "Your Portfolio"}
         </motion.button>
       </motion.div>
 
-      {/* Divider */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="h-px bg-gradient-to-r from-transparent via-slate-400 to-transparent"
-      />
+      {/* Footer Meta */}
+      <div className="pt-24 pb-12 px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-12 py-12 border-t border-primary/10 text-center md:text-left">
+          <div className="flex items-center gap-4">
+            <img
+              src="/logo.png"
+              alt="CivilConnect Logo"
+              className="w-8 h-8 object-contain"
+            />
+            <span className="font-heading text-2xl sm:text-3xl font-black tracking-tighter text-foreground">
+              Civil<span className="text-primary italic">Connect</span>
+            </span>
+          </div>
 
-      {/* Footer */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="space-y-8"
-      >
-        {/* Links */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 sm:gap-8 text-slate-300"
-        >
-          {[
-            { label: "About", href: "#" },
-            { label: "Features", href: "#" },
-            { label: "Builders", href: "#" },
-            { label: "Contact", href: "#" },
-            { label: "Privacy", href: "#" },
-          ].map((link) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              className="hover:text-white transition-colors relative group"
-              whileHover={{ x: 2 }}
-            >
-              {link.label}
-              <motion.div
-                className="absolute -bottom-1 left-0 h-0.5 bg-gold-400"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-          ))}
-        </motion.div>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-[9px] sm:text-[10px] font-black tracking-[0.2em] sm:tracking-[0.3em] text-foreground/30 uppercase">
+            {["About", "Portfolio", "Firms", "Inquiry"].map((item) => (
+              <a key={item} href="#" className="hover:text-primary transition-colors">
+                {item}
+              </a>
+            ))}
+          </div>
 
-        {/* Social links */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center gap-4"
-        >
-          {[
-            { icon: Mail, href: "#" },
-            { icon: Linkedin, href: "#" },
-            { icon: Twitter, href: "#" },
-          ].map((social, idx) => {
-            const Icon = social.icon;
-            return (
+          <div className="flex gap-5">
+            {[Mail, Linkedin, Twitter].map((Icon, i) => (
               <motion.a
-                key={idx}
-                href={social.href}
-                className="w-10 h-10 rounded-full border border-slate-400 flex items-center justify-center text-slate-300 hover:text-white hover:border-white transition-colors"
+                key={i}
+                href="#"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center text-foreground/40 hover:text-primary hover:border-primary transition-all"
                 whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.a>
-            );
-          })}
-        </motion.div>
-
-        {/* Copyright */}
-        <motion.p
-          variants={itemVariants}
-          className="text-center text-sm text-slate-500"
-        >
-          © 2024 CivilConnect. Building the future together.
-        </motion.p>
-      </motion.div>
+            ))}
+          </div>
+        </div>
+        <p className="text-center text-[9px] sm:text-[10px] font-black text-foreground/10 tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+          © 2024 CivilConnect. A Legacy in the Making.
+        </p>
+      </div>
     </div>
+
   );
 }
