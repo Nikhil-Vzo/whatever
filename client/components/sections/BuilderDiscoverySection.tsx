@@ -114,10 +114,10 @@ export default function BuilderDiscoverySection({
       >
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
             {isBuilderView ? "Active Projects for Bidding" : "Trusted Builders Network"}
           </h2>
-          <p className="text-lg text-slate-600">
+          <p className="text-lg text-muted-foreground">
             {isBuilderView
               ? "Browse quality construction projects and submit competitive bids"
               : "Connect with verified builders and firms"}
@@ -131,11 +131,10 @@ export default function BuilderDiscoverySection({
         >
           <motion.button
             onClick={() => setFilter(null)}
-            className={`px-6 py-2 rounded-full font-medium transition-all ${
-              filter === null
-                ? "bg-slate-900 text-white"
-                : "border border-slate-300 text-slate-700 hover:border-slate-500"
-            }`}
+            className={`px-6 py-2 rounded-full font-medium transition-all ${filter === null
+                ? "bg-primary text-primary-foreground"
+                : "border border-border text-muted-foreground hover:border-primary"
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -145,11 +144,10 @@ export default function BuilderDiscoverySection({
             <motion.button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
-                filter === cat
-                  ? "bg-slate-900 text-white"
-                  : "border border-slate-300 text-slate-700 hover:border-slate-500"
-              }`}
+              className={`px-6 py-2 rounded-full font-medium transition-all ${filter === cat
+                  ? "bg-primary text-primary-foreground"
+                  : "border border-border text-muted-foreground hover:border-primary"
+                }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -178,7 +176,7 @@ export default function BuilderDiscoverySection({
           animate={{ opacity: 1 }}
           className="text-center py-12"
         >
-          <p className="text-slate-600">No projects found in this category</p>
+          <p className="text-muted-foreground">No projects found in this category</p>
         </motion.div>
       )}
     </div>
@@ -222,7 +220,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       className="group relative"
     >
       <motion.div
-        className="glass rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer relative premium-shadow hover:premium-shadow-lg transition-shadow"
+        className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer relative premium-shadow hover:premium-shadow-lg transition-shadow"
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3 }}
       >
@@ -253,12 +251,12 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           <div className="space-y-2">
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-slate-900 line-clamp-2 group-hover:text-gold-500 transition-colors">
+                <h3 className="text-xl font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
               </div>
               <motion.div
-                className="px-3 py-1 rounded-full bg-gold-50 text-gold-700 text-xs font-medium whitespace-nowrap ml-2 flex-shrink-0"
+                className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium whitespace-nowrap ml-2 flex-shrink-0"
                 whileHover={{ scale: 1.1 }}
               >
                 {project.status}
@@ -267,43 +265,43 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           </div>
 
           {/* Category badge */}
-          <div className="inline-block px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-full">
+          <div className="inline-block px-3 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full">
             {project.category}
           </div>
 
           {/* Details */}
           <div className="space-y-3 text-sm">
-            <div className="flex items-center gap-2 text-slate-600">
-              <MapPin className="w-4 h-4 text-gold-400 flex-shrink-0" />
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
               <span className="line-clamp-1">{project.location}</span>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center gap-2 text-slate-600">
-                <DollarSign className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <span className="font-medium">{project.budget}</span>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <DollarSign className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="font-medium text-foreground">{project.budget}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Clock className="w-4 h-4 text-gold-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>{project.timeline}</span>
               </div>
             </div>
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-slate-200 group-hover:bg-gold-200 transition-colors mt-auto" />
+          <div className="h-px bg-border group-hover:bg-primary/20 transition-colors mt-auto" />
 
           {/* Footer */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-gold-400" />
-              <span className="text-sm font-medium text-slate-700">
+              <TrendingUp className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">
                 {project.bids} bids
               </span>
             </div>
 
             <motion.button
-              className="px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-800"
+              className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:opacity-90"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar, { type UserRole } from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import ClientJourneySection from "@/components/sections/ClientJourneySection";
@@ -11,9 +10,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 export default function Index() {
   const [userRole, setUserRole] = useState<UserRole>("customer");
   const [isLoading, setIsLoading] = useState(true);
-  const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
+
 
   // Handle Initial Load
   useEffect(() => {
@@ -42,43 +39,30 @@ export default function Index() {
   };
 
   return (
-    <motion.div className="bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground overflow-x-hidden">
       <LoadingOverlay isVisible={isLoading} />
 
       {/* Navigation */}
       <Navbar selectedRole={userRole} onRoleChange={handleRoleChange} />
 
       {/* Hero Section */}
-      <motion.div
-        style={{
-          opacity: heroOpacity,
-          scale: heroScale,
-        }}
-        className="relative pt-20"
-      >
-        <HeroSection userRole={userRole} />
-      </motion.div>
+      <HeroSection userRole={userRole} />
 
       {/* Role-specific sections */}
       {userRole === "customer" ? (
         <>
-          {/* Customer: Post Projects Section */}
           <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8">
             <ClientJourneySection />
           </section>
 
-          {/* Customer: Browse Builders Section */}
-          <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-background/50">
+          <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8">
             <BuilderDiscoverySection />
           </section>
         </>
       ) : (
-        <>
-          {/* Builder: Browse Projects for Bidding */}
-          <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-background/50">
-            <BuilderDiscoverySection isBuilderView={true} />
-          </section>
-        </>
+        <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8">
+          <BuilderDiscoverySection isBuilderView={true} />
+        </section>
       )}
 
       {/* Story Section */}
@@ -87,9 +71,9 @@ export default function Index() {
       </section>
 
       {/* Finale Section */}
-      <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-slate-800 text-white">
+      <section className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-[#022333] text-foreground">
         <FinaleSection userRole={userRole} />
       </section>
-    </motion.div>
+    </div>
   );
 }

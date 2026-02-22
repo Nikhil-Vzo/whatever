@@ -31,7 +31,7 @@ export default function Navbar({ selectedRole, onRoleChange }: NavbarProps) {
           <motion.button
             onClick={() => onRoleChange("customer")}
             className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${selectedRole === "customer"
-              ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(184,134,11,0.2)] border border-primary/20"
+              ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(161,161,161,0.15)] border border-primary/20"
               : "text-foreground/40 hover:text-foreground hover:bg-primary/5"
               }`}
             whileTap={{ scale: 0.98 }}

@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Sora", "var(--font-heading)", "sans-serif"],
-        body: ["Inter", "var(--font-body)", "sans-serif"],
-        accent: ["Sora", "var(--font-accent)", "sans-serif"],
+        heading: ["Cinzel", "var(--font-heading)", "serif"],
+        body: ["Quicksand", "var(--font-body)", "sans-serif"],
+        accent: ["Quicksand", "var(--font-accent)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

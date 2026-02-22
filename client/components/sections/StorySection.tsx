@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Zap, Users, Target, Trophy } from "lucide-react";
+import { HardHat, FileText, Handshake, Shield, Hammer, ClipboardCheck, BadgeCheck, TrendingUp } from "lucide-react";
 import type { UserRole } from "@/components/Navbar";
 
 interface StorySectionProps {
@@ -9,217 +9,299 @@ interface StorySectionProps {
 
 const customerSteps = [
   {
-    icon: Zap,
-    title: "Post Your Project",
-    description: "Share your construction vision with detailed requirements and budget.",
+    icon: FileText,
+    title: "Blueprint Your Vision",
+    description: "Submit your construction project with detailed specs, blueprints, and budget. Our system matches you with the right expertise.",
+    accent: "#3b82f6",
+    tag: "PROJECT INTAKE",
   },
   {
-    icon: Users,
-    title: "Get Qualified Bids",
-    description: "Receive competitive bids from vetted builders in your area.",
+    icon: HardHat,
+    title: "Vetted Crew Bids",
+    description: "Receive competitive proposals from pre-qualified builders. Every contractor is background-checked and performance-rated.",
+    accent: "#f59e0b",
+    tag: "BIDDING PHASE",
   },
   {
-    icon: Target,
-    title: "Compare & Negotiate",
-    description: "Review proposals and negotiate terms directly with selected builders.",
+    icon: Handshake,
+    title: "Seal the Deal",
+    description: "Compare bids side-by-side, negotiate terms, and lock in your preferred builder with transparent contracts.",
+    accent: "#10b981",
+    tag: "NEGOTIATION",
   },
   {
-    icon: Trophy,
-    title: "Build Excellence",
-    description: "Execute your project with expert oversight and quality assurance.",
+    icon: Shield,
+    title: "Build with Confidence",
+    description: "Track progress with milestone-based payments, quality inspections, and real-time site updates until completion.",
+    accent: "#8b5cf6",
+    tag: "EXECUTION",
   },
 ];
 
 const builderSteps = [
   {
-    icon: Zap,
-    title: "Browse Projects",
-    description: "Discover high-quality construction projects matched to your expertise.",
+    icon: ClipboardCheck,
+    title: "Scout Projects",
+    description: "Browse curated construction opportunities filtered by your trade, capacity, location, and expertise level.",
+    accent: "#3b82f6",
+    tag: "DISCOVERY",
   },
   {
-    icon: Users,
-    title: "Submit Competitive Bids",
-    description: "Present your pricing, timeline, and approach to project owners.",
+    icon: Hammer,
+    title: "Place Your Bid",
+    description: "Submit detailed proposals with your pricing, timeline, crew strength, and past project portfolio.",
+    accent: "#f59e0b",
+    tag: "PROPOSAL",
   },
   {
-    icon: Target,
+    icon: Handshake,
     title: "Win & Negotiate",
-    description: "Communicate directly with clients and finalize project terms.",
+    description: "Communicate directly with project owners, finalize scope, and sign off on milestones and deliverables.",
+    accent: "#10b981",
+    tag: "CONTRACT",
   },
   {
-    icon: Trophy,
-    title: "Execute & Grow",
-    description: "Deliver excellence and build your reputation on the platform.",
+    icon: TrendingUp,
+    title: "Deliver & Grow",
+    description: "Execute with excellence, earn verified reviews, and unlock priority access to premium projects.",
+    accent: "#8b5cf6",
+    tag: "GROWTH",
   },
 ];
 
-function StoryStepItem({
+function TimelineStep({
   step,
   index,
-  scrollYProgress,
+  isLast,
 }: {
   step: (typeof customerSteps)[0];
   index: number;
-  scrollYProgress: any;
+  isLast: boolean;
 }) {
-  const Icon = step.icon;
-  const offsetIndex = useTransform(
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 85%", "start 35%"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const x = useTransform(
     scrollYProgress,
     [0, 1],
-    [100, -100 * (index + 1)]
+    [index % 2 === 0 ? -60 : 60, 0]
   );
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const Icon = step.icon;
+  const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      key={index}
-      variants={itemVariants}
-      className={`flex flex-col sm:flex-row gap-8 sm:gap-12 items-start ${index % 2 === 1 ? "sm:flex-row-reverse" : ""
-        }`}
-    >
-      {/* Content */}
-      <div className="flex-1">
-        <div className="space-y-4">
-          <div className="flex items-center gap-4">
-            <motion.div
-              className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Icon className="w-7 h-7 text-primary-foreground" />
-            </motion.div>
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-primary">
-              Phase {index + 1}
-            </span>
-          </div>
+    <div ref={ref} className="relative">
+      {/* Timeline connector line */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 hidden md:block">
+        {/* Vertical line */}
+        {!isLast && (
+          <motion.div
+            className="absolute left-1/2 -translate-x-1/2 top-20 w-[2px] h-full"
+            style={{
+              background: `linear-gradient(to bottom, ${step.accent}40, transparent)`,
+              scaleY: scrollYProgress,
+              transformOrigin: "top",
+            }}
+          />
+        )}
+      </div>
 
-          <div>
-            <h3 className="text-3xl font-black text-foreground mb-3">
+      <div
+        className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? "" : "md:flex-row-reverse"
+          }`}
+      >
+        {/* Content Card */}
+        <motion.div
+          style={{ opacity, x, scale }}
+          className="flex-1 w-full"
+        >
+          <div
+            className="relative bg-card border border-border rounded-2xl p-8 md:p-10 overflow-hidden group hover:border-opacity-60 transition-all duration-500"
+            style={{
+              boxShadow: `0 0 0 1px ${step.accent}10, 0 20px 40px ${step.accent}08`,
+            }}
+          >
+            {/* Construction stripe accent top */}
+            <div
+              className="absolute top-0 left-0 right-0 h-1"
+              style={{
+                background: `repeating-linear-gradient(90deg, ${step.accent}, ${step.accent} 20px, transparent 20px, transparent 30px)`,
+              }}
+            />
+
+            {/* Phase tag */}
+            <div className="flex items-center gap-3 mb-6">
+              <span
+                className="text-[10px] font-black tracking-[0.3em] uppercase px-3 py-1.5 rounded-md"
+                style={{
+                  background: `${step.accent}15`,
+                  color: step.accent,
+                  border: `1px solid ${step.accent}30`,
+                }}
+              >
+                {step.tag}
+              </span>
+              <span className="text-xs text-muted-foreground font-bold">
+                PHASE {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            <h3 className="text-2xl md:text-3xl font-black text-foreground mb-4 leading-tight">
               {step.title}
             </h3>
-            <p className="text-lg text-foreground/60 leading-relaxed font-medium">{step.description}</p>
-          </div>
-        </div>
-      </div>
 
-      {/* Visual indicator */}
-      <div className="hidden lg:block flex-1">
-        <motion.div
-          className="w-full h-64 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-border"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-          style={{ y: offsetIndex }}
-        >
-          <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-            <motion.span
-              className="font-heading text-primary font-black tracking-widest uppercase text-[10px]"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              Excellence Defined
-            </motion.span>
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="w-32 h-32 border border-primary/10 rounded-full"
-            />
+            <p className="text-base text-muted-foreground leading-relaxed font-medium">
+              {step.description}
+            </p>
+
+            {/* Decorative blueprint grid */}
+            <div className="absolute bottom-0 right-0 w-24 h-24 opacity-[0.03] pointer-events-none">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <defs>
+                  <pattern id={`grid-${index}`} width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill={`url(#grid-${index})`} />
+              </svg>
+            </div>
           </div>
         </motion.div>
+
+        {/* Center Node */}
+        <motion.div
+          className="relative z-10 flex-shrink-0 order-first md:order-none"
+          style={{ scale }}
+        >
+          <motion.div
+            className="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center relative"
+            style={{
+              background: `linear-gradient(135deg, ${step.accent}20, ${step.accent}05)`,
+              border: `2px solid ${step.accent}40`,
+              boxShadow: `0 0 30px ${step.accent}15`,
+            }}
+            whileHover={{ rotate: -5, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Icon className="w-8 h-8 md:w-9 md:h-9" style={{ color: step.accent }} />
+
+            {/* Pulse ring */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl"
+              style={{ border: `2px solid ${step.accent}` }}
+              animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
+            />
+          </motion.div>
+
+          {/* Step number */}
+          <div
+            className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black"
+            style={{
+              background: step.accent,
+              color: "#000",
+              boxShadow: `0 2px 10px ${step.accent}50`,
+            }}
+          >
+            {index + 1}
+          </div>
+        </motion.div>
+
+        {/* Empty space for alternating layout */}
+        <div className="flex-1 hidden md:block" />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default function StorySection({ userRole = "customer" }: StorySectionProps) {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
   const steps = userRole === "customer" ? customerSteps : builderSteps;
+  const headerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: headerProgress } = useScroll({
+    target: headerRef,
+    offset: ["start 80%", "start 40%"],
+  });
+  const headerOpacity = useTransform(headerProgress, [0, 1], [0, 1]);
+  const headerY = useTransform(headerProgress, [0, 1], [40, 0]);
 
   return (
-    <div ref={containerRef} className="space-y-20">
+    <div className="space-y-20 md:space-y-28 max-w-6xl mx-auto px-4">
       {/* Header */}
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="text-center space-y-4 px-4"
+        ref={headerRef}
+        style={{ opacity: headerOpacity, y: headerY }}
+        className="text-center space-y-6"
       >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl sm:text-6xl font-black text-foreground"
+        {/* Construction badge */}
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border"
         >
-          How It <span className="text-secondary italic">Works</span>
-        </motion.h2>
-        <motion.p
-          variants={itemVariants}
-          className="text-xl text-foreground/60 max-w-2xl mx-auto font-medium"
-        >
-          A seamless journey from vision to reality, designed for peak collaboration.
-        </motion.p>
+          <HardHat className="w-4 h-4 text-amber-500" />
+          <span className="text-xs font-black tracking-[0.3em] uppercase text-muted-foreground">
+            The Process
+          </span>
+        </motion.div>
+
+        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.95]">
+          How We{" "}
+          <span className="relative inline-block">
+            <span className="text-muted-foreground italic">Build</span>
+            {/* Underline accent */}
+            <motion.div
+              className="absolute -bottom-2 left-0 h-1 bg-amber-500/60 rounded-full"
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </span>
+        </h2>
+
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-medium">
+          From blueprint to handover — a transparent, milestone-driven process
+          designed for construction excellence.
+        </p>
       </motion.div>
 
-      {/* Process timeline */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        className="space-y-16"
-      >
+      {/* Timeline */}
+      <div className="space-y-16 md:space-y-24 relative">
+        {/* Central vertical line (desktop only) */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-border via-border/50 to-transparent hidden md:block" />
+
         {steps.map((step, index) => (
-          <StoryStepItem
+          <TimelineStep
             key={index}
             step={step}
             index={index}
-            scrollYProgress={scrollYProgress}
+            isLast={index === steps.length - 1}
           />
         ))}
-      </motion.div>
+      </div>
 
       {/* Bottom CTA */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center"
+        className="text-center pt-8"
       >
         <motion.button
-          className="px-12 py-5 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-widest text-sm shadow-[0_15px_40px_rgba(184,134,11,0.2)]"
+          className="px-12 py-5 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-widest text-sm shadow-[0_15px_40px_rgba(0,0,0,0.25)] hover:shadow-amber-500/10 transition-all"
           whileHover={{ scale: 1.05, y: -4 }}
           whileTap={{ scale: 0.95 }}
         >
-          Begin Your Journey
+          Start Your Project
         </motion.button>
       </motion.div>
     </div>
